@@ -20,8 +20,9 @@ This toolkit provides MSIS security analysis for the **Dilithium digital signatu
 
 ### Basic Execution
 To run the security analysis with default parameters:
-> python Dilithium.py
-
+```bash
+ python Dilithium.py
+```
 
 ## Using "Dimension for Free"(D4f) Technique
 
@@ -31,24 +32,30 @@ Dimension-for-Free (D4f) is an optimization technique in lattice reduction that 
 ###  To enable the D4f technique as used in the paper, uncomment the following lines in MSIS_security.py:
 
 1. In the function SIS_linf_cost_our, around lines 196-197 (as per the provided code):
-
+```bash
 # bkz_cost, p_bkz = SIS_linf_cost_sub(i,j,l,B,q,round(b - theo_dim4free_fun_optimistic(b)),1)
 # sieve_cost, p_sieve = SIS_linf_cost_sub(i,j,l,B,q,round(rank - theo_dim4free_fun_optimistic(rank)),1)
+```
 
 Replace them with:
-
+```bash
 bkz_cost, p_bkz = SIS_linf_cost_sub(i,j,l,B,q,round(b - theo_dim4free_fun_optimistic(b)),1)
 sieve_cost, p_sieve = SIS_linf_cost_sub(i,j,l,B,q,round(rank - theo_dim4free_fun_optimistic(rank)),1)
+```
 
 2. Similarly, in the same function, around lines 236-237 (as per the provided code):
-
+```bash
 # bkz_cost_prime, p_bkz_prime = SIS_linf_cost_sub(i_prime,j_prime,l_prime,B,q,round(b_prime - theo_dim4free_fun_optimistic(b_prime)),1)
 # sieve_cost_prime, p_sieve_prime = SIS_linf_cost_sub(i_prime,j_prime,l_prime,B,q,round(rank_prime - theo_dim4free_fun_optimistic(rank_prime)),1)
+```
 
 Replace them with:
-
+```bash
 bkz_cost_prime, p_bkz_prime = SIS_linf_cost_sub(i_prime,j_prime,l_prime,B,q,round(b_prime - theo_dim4free_fun_optimistic(b_prime)),1)
 sieve_cost_prime, p_sieve_prime = SIS_linf_cost_sub(i_prime,j_prime,l_prime,B,q,round(rank_prime - theo_dim4free_fun_optimistic(rank_prime)),1)
+```
 
-3.To run the security analysis with D4f:
->python Dilithium.py
+3. To run the security analysis with D4f:
+```bash
+ python Dilithium.py
+```
