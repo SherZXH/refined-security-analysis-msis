@@ -85,5 +85,11 @@ python security_analysis.py
 - Analyzes Dilithium parameter sets  
 - Compares with Core-SVP baseline
 
+## Contributing
+ - For questions about code implementation or experimental reproduction:
+ - Check the detailed README files in each experiment subdirectory
+ - Review the logs in logs/ for expected output formats
+ - Examine data/ for input/output examples
+ - Contact the authors for specific implementation questions
 
 
