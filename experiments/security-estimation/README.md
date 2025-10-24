@@ -2,7 +2,7 @@
 
 ## Overview
 
-This toolkit provides MSIS security analysis for the **Dilithium digital signature scheme**, a lattice-based post-quantum cryptographic algorithm selected as a finalist in the NIST post-quantum cryptography standardization process. The project evaluates security levels by analyzing the hardness of the Module Short Integer Solution (MSIS) problem using advanced lattice reduction techniques.
+This code provides MSIS security analysis for the **Dilithium digital signature scheme**, a lattice-based post-quantum cryptographic algorithm selected as a finalist in the NIST post-quantum cryptography standardization process. The project evaluates security levels by analyzing the hardness of the Module Short Integer Solution (MSIS) problem using advanced lattice reduction techniques.
 
 ## Structure
 
