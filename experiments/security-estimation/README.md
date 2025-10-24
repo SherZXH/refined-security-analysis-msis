@@ -27,7 +27,7 @@ To run the security analysis with default parameters:
 ## Using "Dimension for Free"(D4f) Technique
 
 ###  About D4f Technique
-Dimension-for-Free (D4f) is an advanced lattice reduction optimization technique proposed by Ducas [D4F2018]. The method involves initially sieving on a locally projected lattice $\mathcal{L}{[l, n]}$, then lifting all vectors in the list to $\mathcal{L}{[1, n]}$. If $\mathbf{v}$ represents a short vector in $\mathcal{L}{[1, n]}$, then $\mathbf{v}{[l, n]}$ is likely to also be short and thus contained in the sieving list. This allows sieving on $\mathcal{L}{[l, n]}$ to potentially recover the shortest vector in $\mathcal{L}{[1, n]}$, effectively providing $l$ dimensions "for free".
+Dimension-for-Free (D4f) is an advanced lattice reduction optimization technique proposed by Ducas [D4F2018]. The method involves initially sieving on a locally projected lattice $\mathcal{L}_{[l, n]}$, then lifting all vectors in the list to $\mathcal{L}_{[1, n]}$. If $\mathbf{v}$ represents a short vector in $\mathcal{L}_{[1, n]}$, then $\mathbf{v}_{[l, n]}$ is likely to also be short and thus contained in the sieving list. This allows sieving on $\mathcal{L}_{[l, n]}$ to potentially recover the shortest vector in $\mathcal{L}_{[1, n]}$, effectively providing $l$ dimensions "for free".
 
 The asymptotic free dimension $l$ is given by $\frac{n \ln (4 / 3)}{\ln (n / 2 \pi e)}$, though practical implementations [D4F2018] can achieve up to $n / \ln (n)$.
 
