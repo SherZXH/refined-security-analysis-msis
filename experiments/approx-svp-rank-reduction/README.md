@@ -1,3 +1,5 @@
+# Refined Approx-SVP Rank Reduction Analysis
+
 ## Overview
 
 This code implements the refined Approx-SVP rank reduction analysis. The project evaluates lattice security by analyzing the hardness of the Approximate Shortest Vector Problem (Approx-SVP) using advanced lattice reduction techniques and validates them through experiments on high-dimensional q-ary lattices.
