@@ -1,0 +1,189 @@
+#!/bin/bash
+
+declare -A PARAM_SETS=(
+    # 参数组合1          Gamma值   预处理文件路径
+    ["svp120_exp_g130_beta60"]="1.30:svpchallenge/120-midmat-bkz49-pnjbkz-beta60-jump1-reduced-hf-1.428280-Tbkz-20.071112s-Tpnjbkz-751.049610s.txt"
+    ["svp120_exp_g125_beta60"]="1.25:svpchallenge/120-midmat-bkz49-pnjbkz-beta60-jump1-reduced-hf-1.428280-Tbkz-20.071112s-Tpnjbkz-751.049610s.txt"
+    ["svp120_exp_g120_beta60"]="1.20:svpchallenge/120-midmat-bkz49-pnjbkz-beta60-jump1-reduced-hf-1.428280-Tbkz-20.071112s-Tpnjbkz-751.049610s.txt"
+    ["svp120_exp_g115_beta60"]="1.15:svpchallenge/120-midmat-bkz49-pnjbkz-beta60-jump1-reduced-hf-1.428280-Tbkz-20.071112s-Tpnjbkz-751.049610s.txt"
+    ["svp120_exp_g110_beta60"]="1.10:svpchallenge/120-midmat-bkz49-pnjbkz-beta60-jump1-reduced-hf-1.428280-Tbkz-20.071112s-Tpnjbkz-751.049610s.txt"
+    ["svp120_exp_g105_beta60"]="1.05:svpchallenge/120-midmat-bkz49-pnjbkz-beta60-jump1-reduced-hf-1.428280-Tbkz-20.071112s-Tpnjbkz-751.049610s.txt"
+
+    ["svp120_exp_g130_beta65"]="1.30:svpchallenge/120-midmat-bkz49-pnjbkz-beta65-jump1-reduced-hf-1.380618-Tbkz-20.071112s-Tpnjbkz-1025.015023s.txt"
+    ["svp120_exp_g125_beta65"]="1.25:svpchallenge/120-midmat-bkz49-pnjbkz-beta65-jump1-reduced-hf-1.380618-Tbkz-20.071112s-Tpnjbkz-1025.015023s.txt"
+    ["svp120_exp_g120_beta65"]="1.20:svpchallenge/120-midmat-bkz49-pnjbkz-beta65-jump1-reduced-hf-1.380618-Tbkz-20.071112s-Tpnjbkz-1025.015023s.txt"
+    ["svp120_exp_g115_beta65"]="1.15:svpchallenge/120-midmat-bkz49-pnjbkz-beta65-jump1-reduced-hf-1.380618-Tbkz-20.071112s-Tpnjbkz-1025.015023s.txt"
+    ["svp120_exp_g110_beta65"]="1.10:svpchallenge/120-midmat-bkz49-pnjbkz-beta65-jump1-reduced-hf-1.380618-Tbkz-20.071112s-Tpnjbkz-1025.015023s.txt"
+    ["svp120_exp_g105_beta65"]="1.05:svpchallenge/120-midmat-bkz49-pnjbkz-beta65-jump1-reduced-hf-1.380618-Tbkz-20.071112s-Tpnjbkz-1025.015023s.txt"
+
+    ["svp120_exp_g130_beta70"]="1.30:svpchallenge/120-midmat-bkz49-pnjbkz-beta70-jump1-reduced-hf-1.306140-Tbkz-20.071112s-Tpnjbkz-1377.108268s.txt"
+    ["svp120_exp_g125_beta70"]="1.25:svpchallenge/120-midmat-bkz49-pnjbkz-beta70-jump1-reduced-hf-1.306140-Tbkz-20.071112s-Tpnjbkz-1377.108268s.txt"
+    ["svp120_exp_g120_beta70"]="1.20:svpchallenge/120-midmat-bkz49-pnjbkz-beta70-jump1-reduced-hf-1.306140-Tbkz-20.071112s-Tpnjbkz-1377.108268s.txt"
+    ["svp120_exp_g115_beta70"]="1.15:svpchallenge/120-midmat-bkz49-pnjbkz-beta70-jump1-reduced-hf-1.306140-Tbkz-20.071112s-Tpnjbkz-1377.108268s.txt"
+    ["svp120_exp_g110_beta70"]="1.10:svpchallenge/120-midmat-bkz49-pnjbkz-beta70-jump1-reduced-hf-1.306140-Tbkz-20.071112s-Tpnjbkz-1377.108268s.txt"
+    ["svp120_exp_g105_beta70"]="1.05:svpchallenge/120-midmat-bkz49-pnjbkz-beta70-jump1-reduced-hf-1.306140-Tbkz-20.071112s-Tpnjbkz-1377.108268s.txt"
+
+
+    ["svp150_exp_g115_beta80"]="1.15:svpchallenge/150-midmat-bkz49-pnjbkz-beta80-jump1-reduced-hf-1.493677-Tbkz-15.833040s-Tpnjbkz-947.933120s.txt"
+    ["svp150_exp_g110_beta80"]="1.10:svpchallenge/150-midmat-bkz49-pnjbkz-beta80-jump1-reduced-hf-1.493677-Tbkz-15.833040s-Tpnjbkz-947.933120s.txt"
+    ["svp150_exp_g105_beta80"]="1.05:svpchallenge/150-midmat-bkz49-pnjbkz-beta80-jump1-reduced-hf-1.493677-Tbkz-15.833040s-Tpnjbkz-947.933120s.txt"
+
+    ["svp150_exp_g115_beta85"]="1.15:svpchallenge/150-midmat-bkz49-pnjbkz-beta85-jump1-reduced-hf-1.466255-Tbkz-15.833040s-Tpnjbkz-1451.886913s.txt"
+    ["svp150_exp_g110_beta85"]="1.10:svpchallenge/150-midmat-bkz49-pnjbkz-beta85-jump1-reduced-hf-1.466255-Tbkz-15.833040s-Tpnjbkz-1451.886913s.txt"
+    ["svp150_exp_g105_beta85"]="1.05:svpchallenge/150-midmat-bkz49-pnjbkz-beta85-jump1-reduced-hf-1.466255-Tbkz-15.833040s-Tpnjbkz-1451.886913s.txt"
+
+    ["svp150_exp_g115_beta90"]="1.15:svpchallenge/150-midmat-bkz49-pnjbkz-beta90-jump1-reduced-hf-1.445773-Tbkz-15.833040s-Tpnjbkz-2523.419389s.txt"
+    ["svp150_exp_g110_beta90"]="1.10:svpchallenge/150-midmat-bkz49-pnjbkz-beta90-jump1-reduced-hf-1.445773-Tbkz-15.833040s-Tpnjbkz-2523.419389s.txt"
+    ["svp150_exp_g105_beta90"]="1.05:svpchallenge/150-midmat-bkz49-pnjbkz-beta90-jump1-reduced-hf-1.445773-Tbkz-15.833040s-Tpnjbkz-2523.419389s.txt"
+
+
+    ["svp150_exp_g105_beta95"]="1.05:svpchallenge/150-midmat-bkz49-pnjbkz-beta95-jump1-reduced-hf-1.347392-Tbkz-15.833040s-Tpnjbkz-5044.916253s.txt"
+    
+    ["svp180_exp_g1026396_beta164"]="1.026396:wnjbkz-132-jump-3-1th-tours.txt"
+
+    ["svp171_exp_g1026396_beta166"]="1.026396:wnjbkz-126-jump-4-0th-tours.txt"
+
+    ["svp176_exp_g1026396_beta171"]="1.026396:pump-down-llb-0-beta-176-f-33"
+
+      ["q1025_exp_g2891519_beta131"]="2.8915:lattice_basis/pnjbkz-beta-140-jump-001-tours-000-dim-1025-cols-330.txt"
+
+      ["q925_exp_g2777266_beta125"]="2.5237266:pnjbkz-beta-125-jump-001-tours-000-dim-925-cols-295.txt"
+
+      ["q850_exp_g1668906_beta136"]="1.6296:pnjbkz-beta-136-jump-003-tours-000-dim-850-cols-230.txt"
+
+       ["q1025_exp_g2546286_beta141"]="2.546286:pump-down-llb-0-beta-180-f-35-37-180-143"
+
+       ["q1050_exp_g2892289"]="2.892289:workoutbkz-121-jump-2-kappa-77-beta-121-f-13"
+)
+
+ORDERED_KEYS=(
+    "q1025_exp_g2891519_beta131"
+)
+
+# NUMA配置
+NUMA_NODE_0_CPUS="0-35,72-107"
+NUMA_NODE_1_CPUS="36-71,108-143"
+THREADS_PER_NODE=72
+
+# 监控配置
+GPU_MONITOR_INTERVAL=300  # 5分钟监控一次
+MEMORY_MONITOR_INTERVAL=600  # 10分钟监控一次系统内存
+
+# 优化的GPU监控函数
+monitor_gpu() {
+    local exp_name=$1
+    local monitor_file="logs/${exp_name}_gpu_monitor.log"
+    
+    echo "=== GPU监控开始 $(date) ===" > $monitor_file
+    echo "监控间隔: ${GPU_MONITOR_INTERVAL}秒" >> $monitor_file
+    
+    local count=0
+    while true; do
+        {
+            echo "=== 第$((++count))次监控 $(date) ==="
+            nvidia-smi --query-gpu=index,name,utilization.gpu,memory.used,memory.total --format=csv
+            echo "---"
+        } >> $monitor_file
+        sleep $GPU_MONITOR_INTERVAL
+    done
+}
+
+# 系统资源监控函数
+monitor_system() {
+    local exp_name=$1
+    local monitor_file="logs/${exp_name}_system_monitor.log"
+    
+    echo "=== 系统监控开始 $(date) ===" > $monitor_file
+    echo "监控间隔: ${MEMORY_MONITOR_INTERVAL}秒" >> $monitor_file
+    
+    local count=0
+    while true; do
+        {
+            echo "=== 第$((++count))次系统监控 $(date) ==="
+            echo "内存使用:"
+            free -h | grep -E "Mem|Swap"
+            echo "---"
+            echo "NUMA内存分布:"
+            numastat -m | grep -E "Node|Total"
+            echo "---"
+        } >> $monitor_file
+        sleep $MEMORY_MONITOR_INTERVAL
+    done
+}
+
+# 简化的GPU快速检查（只在开始和结束时运行）
+quick_gpu_check() {
+    local exp_name=$1
+    local stage=$2  # start or end
+    
+    {
+        echo "=== GPU快速检查 ($stage) $(date) ==="
+        nvidia-smi --query-gpu=index,name,memory.used,memory.total --format=csv
+    } >> "logs/${exp_name}_quick_gpu.log"
+}
+
+for exp_name in "${ORDERED_KEYS[@]}"; do
+    IFS=':' read gamma filename <<< ${PARAM_SETS[$exp_name]}
+    if [[ ! -f $filename ]]; then
+        echo "错误：文件不存在 - $filename"
+        echo "问题出现在参数组合: $exp_name"
+        exit 1
+    fi
+    
+    echo "================================"
+    echo " 开始实验组合: $exp_name"
+    echo " Gamma: $gamma | 预处理文件: $filename"
+    echo " 监控间隔: GPU-${GPU_MONITOR_INTERVAL}秒, 系统-${MEMORY_MONITOR_INTERVAL}秒"
+    echo "================================"
+    
+    for ((run=1; run<=5; run++)); do
+        log_file="logs/${exp_name}_run.log"
+        
+        echo "$(date +'%Y-%m-%d %T') 启动第 ${run} 次运行" | tee -a $log_file
+        
+        # 开始前的快速GPU检查
+        quick_gpu_check "$exp_name" "start"
+        
+        # 启动监控（可选，如果不需要监控可以注释掉）
+        # monitor_gpu "$exp_name" &
+        # gpu_monitor_pid=$!
+        # 
+        # monitor_system "$exp_name" &
+        # system_monitor_pid=$!
+        
+        # 执行主程序
+        echo "NUMA绑定: CPU=$NUMA_NODE_1_CPUS, 内存=节点1" | tee -a $log_file
+        #numactl --physcpubind=$NUMA_NODE_1_CPUS --membind=1 python3 svp_challenge.py 180 \
+        #numactl  --interleave=all python3 svp_challenge.py 230 \
+        #numactl  --physcpubind=$NUMA_NODE_1_CPUS --membind=1  python3 svp_challenge.py 230 \
+        #numactl  --physcpubind=$NUMA_NODE_0_CPUS --membind=0  python3 svp_challenge.py 330 \
+        numactl  --interleave=all python3 svp_challenge.py 330 \
+            --gamma $gamma \
+            --preprocessed-file "$filename" \
+            --threads $THREADS_PER_NODE \
+            --gpus 4 2>&1 | tee -a $log_file
+        
+        # 停止监控（如果启动了）
+        # kill $gpu_monitor_pid $system_monitor_pid 2>/dev/null
+        
+        # 结束时的快速GPU检查
+        quick_gpu_check "$exp_name" "end"
+        
+        # 检查退出状态并提供建议
+        exit_code=${PIPESTATUS[0]}
+        if [ $exit_code -ne 0 ]; then
+            echo "警告：程序异常退出 (代码: $exit_code)" | tee -a $log_file
+            echo "建议排查步骤：" | tee -a $log_file
+            echo "1. 检查GPU内存使用情况" | tee -a $log_file
+            echo "2. 查看详细错误日志: $log_file" | tee -a $log_file
+            echo "3. 尝试减少GPU数量或线程数" | tee -a $log_file
+        fi
+        
+        echo "$(date +'%Y-%m-%d %T') 第 ${run} 次运行完成" | tee -a $log_file
+        echo "--------------------------------" >> $log_file
+        
+        # 运行间隔休息（可选）
+        # echo "等待10秒后继续下一个实验..." | tee -a $log_file
+        # sleep 10
+    done
+done
