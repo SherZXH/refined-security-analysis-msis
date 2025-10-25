@@ -171,10 +171,10 @@ def qary_kernel(arg0, params=None, seed=None):
             flast = pump_n_jump_bkz_tour(g6k, dummy_tracer, blocksize=beta,  jump = jump, verbose=True, extra_dim4free=0, pump_params=pump_params,goal_r0=goal_r0)[0]
         elif mode == 2:
             print("Starting a %dth wnjbkz-%d-%d tour." % (t,beta,jump))
-            flast = workout_bkz_tour(g6k, dummy_tracer, blocksize=beta, extra_dim4free=0,jump = jump,tours = t,total_tours = tours,goal_r0=goal_r0)[0]
+            flast = workout_bkz_tour(g6k, dummy_tracer, blocksize=beta, extra_dim4free=0,jump = jump,tours = t,total_tours = tours,goal_r0=goal_r0)
         elif mode == 3:
             print("Starting a %dth headwnjbkz-%d-%d tour." % (t,beta,jump))
-            flast = workout_bkz_tour(g6k, dummy_tracer, rank = rank, blocksize=beta, extra_dim4free=0,jump = jump,tours = t,total_tours = tours,goal_r0=goal_r0)[0]
+            flast = workout_bkz_tour(g6k, dummy_tracer, rank = rank, blocksize=beta, extra_dim4free=0,jump = jump,tours = t,total_tours = tours,goal_r0=goal_r0)
 
         print("tourtime: %f sec." %(time.time() - T1)) 
         print("||b0|| = %f. \n" % g6k.M.get_r(0, 0)**0.5)
