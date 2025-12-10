@@ -22,7 +22,7 @@ except NameError:
     basestring = str
 
 
-def get_current_slope(r, start_row=0, stop_row=-1):                         # 得到当前格基矩阵的轮廓，用来评估当前格基质量
+def get_current_slope(r, start_row=0, stop_row=-1):                         
     """
     A Python re-implementation of ``MatGSO.get_current_slope``.
 
@@ -38,16 +38,15 @@ def get_current_slope(r, start_row=0, stop_row=-1):                         # �
         -0.085500625...
 
     """
-    x = [log(r[i]) for i in range(start_row, stop_row)]                     # 首先把每个基向量取自然对数
-    n = stop_row - start_row                                                # 基向量的个数（不一定是完整基）
-    i_mean = (n - 1) * 0.5 + start_row                                      # 维数n的中间值（靠下）
-    x_mean = sum(x)/n                                                       # 基向量取自然对数的平均值
+    x = [log(r[i]) for i in range(start_row, stop_row)]                     
+    n = stop_row - start_row                                                
+    i_mean = (n - 1) * 0.5 + start_row                                      
+    x_mean = sum(x)/n                                                       
     v1, v2 = 0.0, 0.0
     for i in range(stop_row - start_row):
         v1 += (i - i_mean) * (x[i] - x_mean)
         v2 += (i - i_mean) * (i - i_mean)
-    return v1 / v2                                                          # 一种刻画格基范数均匀程度的计量方式
-
+    return v1 / v2                                                          
 
 def dim4free_wrapper(dim4free_fun, blocksize):
     """
