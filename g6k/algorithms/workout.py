@@ -80,18 +80,18 @@ def workout(g6k, tracer, rank,kappa, blocksize, dim4free_min=0,              # M
     flast = 100
     with tracer.context(("workout", "kappa:%d beta:%d f:%d" % (kappa, blocksize, dim4free_max))):
         for f in fs:
-            timestart = time.time()                                 # 每轮计时
+            timestart = time.time()                                 
 
-            sys.stdout.flush()                                      # 把当前处理过程打印到屏幕上
+            sys.stdout.flush()                                      
             if kappa ==0:
                 print("\r workout-   k:%d, blocksize:%d, fs:%d " % (kappa, blocksize-dim4free_max+f,f))
             else:
                 print("\r workout-   k:%d, blocksize:%d, fs:%d " % (kappa, blocksize,f))
 
             if kappa ==0:
-                flast = min(flast, pump(g6k, tracer, kappa, blocksize-dim4free_max+f, f, goal_r0=goal_r0, down_sieve =  True,verbose = False)[0])      # 调用PUMP算法 
+                flast = min(flast, pump(g6k, tracer, kappa, blocksize-dim4free_max+f, f, goal_r0=goal_r0, down_sieve =  True,verbose = False)[0])      
             else:
-                flast = min(flast, pump(g6k, tracer, kappa, blocksize, f, goal_r0=goal_r0, down_sieve = True, verbose = False)[0])      # 调用PUMP算法 
+                flast = min(flast, pump(g6k, tracer, kappa, blocksize, f, goal_r0=goal_r0, down_sieve = True, verbose = False)[0])      
             
             if rank ==0:
                 sub_dir = "qarychallenge/dim-%d/wnjbkz-%d-jump-%d" % (g6k.full_n,blocksize - extra_dim4free,dim4free_dec)
